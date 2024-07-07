@@ -257,6 +257,8 @@ class DinoVisionTransformer(nn.Module):
 
         x = self.prepare_tokens_with_masks(x, masks)
 
+        print("Shape of Embeddings before Transformers:", x.shape)
+
         for blk in self.blocks:
             x = blk(x)
 
