@@ -18,7 +18,7 @@ model = vit_base(img_size = 518, patch_size = 14, init_values = 1.0, ffn_layer =
 # equip model with weights
 state_dict = torch.hub.load_state_dict_from_url("https://dl.fbaipublicfiles.com/dinov2/dinov2_vitb14/dinov2_vitb14_reg4_pretrain.pth",
                                                 map_location="cpu")
-model.load_state_dict(state_dict)
+model.load_state_dict(state_dict, strict=False)
 
 # load image
 url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
@@ -37,4 +37,10 @@ pixel_Values = transformations(image).unsqueeze(0)
 # run model
 outputs = model.forward_features(pixel_Values)
 
-print("Outputs", outputs)
+# tensors to use to check if hugging face can have exact same tensors
+# on similar image
+for k, v in outputs.items():
+  if isinstance(v, torch.Tensor):
+    print(k, v.shape)
+  else:
+    print(k, v)
