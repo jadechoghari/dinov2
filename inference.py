@@ -11,7 +11,7 @@ image = Image.open(requests.get(url, stream=True).raw)
 
 # load model
 # provide same input as image
-model = vit_base(img_size = 518, patch_size = 14, init_values = 1.0, ffn_layer = "mlp", block_chunks = 0, pretrained = True)
+model = vit_base(img_size = 518, patch_size = 14, init_values = 1.0, ffn_layer = "mlp", block_chunks = 0)
 
 
 # keys are name of parameters, values are actual param
