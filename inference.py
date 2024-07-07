@@ -10,7 +10,8 @@ url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
 image = Image.open(requests.get(url, stream=True).raw)
 
 # load model
-model = vit_base()
+# provide same input as image
+model = vit_base(img_size = 518, patch_size = 14, init_values = 1.0, ffn_layer = "mlp", block_chunks = 0, pretrained = True)
 
 
 # keys are name of parameters, values are actual param
