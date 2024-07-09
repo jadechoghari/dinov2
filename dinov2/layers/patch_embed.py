@@ -51,6 +51,8 @@ class PatchEmbed(nn.Module):
             image_HW[0] // patch_HW[0],
             image_HW[1] // patch_HW[1],
         )
+        print("Image size: ", img_size)
+        print("Patch size: ", patch_size)
 
         self.img_size = image_HW
         self.patch_size = patch_HW
