@@ -106,6 +106,7 @@ class DinoVisionTransformer(nn.Module):
         self.patch_embed = embed_layer(img_size=img_size, patch_size=patch_size, in_chans=in_chans, embed_dim=embed_dim)
         num_patches = self.patch_embed.num_patches
 
+        print("Number of patches: ", num_patches)
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + self.num_tokens, embed_dim))
         assert num_register_tokens >= 0
@@ -257,14 +258,14 @@ class DinoVisionTransformer(nn.Module):
 
         x = self.prepare_tokens_with_masks(x, masks)
 
-        print("Shape of Embeddings before Transformers:", x.shape)
+        print("Shape of patch embeddings: ", x.shape)
+        print("First values of patch embeddings: ", x[0, :3, :3])
 
         for blk in self.blocks:
             x = blk(x)
 
         x_norm = self.norm(x)
 
-        print('First values of x_norm', x_norm[0, :3, 3])
 
         return {
             "x_norm_clstoken": x_norm[:, 0],
