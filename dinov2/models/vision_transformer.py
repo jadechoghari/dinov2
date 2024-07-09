@@ -265,7 +265,7 @@ class DinoVisionTransformer(nn.Module):
         x_norm = self.norm(x)
 
         print('First values of x_norm', x_norm[0, :3, 3])
-        print("x_norm_cls_token:", x_norm[:, 0])
+
         return {
             "x_norm_clstoken": x_norm[:, 0],
             "x_norm_regtokens": x_norm[:, 1 : self.num_register_tokens + 1],
