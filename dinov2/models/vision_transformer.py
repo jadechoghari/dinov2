@@ -266,6 +266,8 @@ class DinoVisionTransformer(nn.Module):
 
         x_norm = self.norm(x)
 
+        print("Shape of final hidden states:", x_norm.shape)
+        print("First values of final hidden state", x[0, :3, :3])
 
         return {
             "x_norm_clstoken": x_norm[:, 0],
